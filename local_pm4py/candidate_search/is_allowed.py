@@ -10,12 +10,19 @@ PRECEDENCE = "precedence"
 COEXISTENCE = "coexistence"
 NONCOEXISTENCE = "noncoexistence"
 NONSUCCESSION = "nonsuccession"
-
+ATMOST_ONE = "atmost1"
 
 def is_allowed(S1,S2,rules,st_net,en_net):
     exclude = []
     block = False
 
+    for r in rules[ATMOST_ONE]:
+        if r in S1:
+            exclude.append('loop')
+            exclude.append('loop_tau')
+        elif r in S2:
+            exclude.append('loop')
+            exclude.append('loop_tau')
 
     for r in rules[EXISTENCE]:
         if r in S1:
@@ -23,16 +30,6 @@ def is_allowed(S1,S2,rules,st_net,en_net):
         elif r in S2:
             exclude.append('exc')
             exclude.append('loop')
-
-    for r in rules[EXACTLY_ONE]:
-        if r in S1:
-            exclude.append('exc')
-            exclude.append('loop')
-            exclude.append('loop_tau')
-        elif r in S2:
-            exclude.append('exc')
-            exclude.append('loop')
-            exclude.append('loop_tau')
 
 
 
