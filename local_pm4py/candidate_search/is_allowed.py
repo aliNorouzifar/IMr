@@ -26,9 +26,11 @@ def is_allowed(S1,S2,rules,st_net,en_net):
 
     for r in rules[EXACTLY_ONE]:
         if r in S1:
+            exclude.append('exc')
             exclude.append('loop')
             exclude.append('loop_tau')
         elif r in S2:
+            exclude.append('exc')
             exclude.append('loop')
             exclude.append('loop_tau')
 
